@@ -11,7 +11,7 @@
     <title>Document</title>
     <meta charset="utf-8">
     <title>{{ config('app.name', 'Laravel') }}</title>
-    @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+    @vite(['resources/js/app.js'])
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet"
