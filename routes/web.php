@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 Route::resource('/employees', 'App\Http\Controllers\EmployeeController');
 Route::get('/export/', [EmployeeController::class, 'export']);
+Route::post('/import/', [EmployeeController::class, 'import']);
+Route::get('/import-form/', [EmployeeController::class, 'importForm']);

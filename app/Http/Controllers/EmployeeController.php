@@ -4,11 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Exports\EmployeeExport;
+use App\Models\Imports\EmployeeImport;
 use Illuminate\Http\Request;
 use Excel;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
+    public function importForm()
+    {
+        return view('employees.import');
+    }
+    public function import()
+    {
+        Employee::truncate();
+        Excel::import(new EmployeeImport, request()->file('file'));
+        return redirect('/employees');
+    }
     public function export() 
     {
         return Excel::download(new EmployeeExport, 'employee.xlsx');

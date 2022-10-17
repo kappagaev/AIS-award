@@ -28,6 +28,8 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="/">Таблиця</a>
                 <a class="nav-item nav-link" href="/employees/create">Створити</a>
+                <a class="nav-item nav-link" href="/export">Експорт</a>
+                <a class="nav-item nav-link" href="/import-form">Імпорт</a>
             </div>
         </div>
     </nav>
