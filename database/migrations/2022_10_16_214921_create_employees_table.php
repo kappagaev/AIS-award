@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name');
+            $table->string('faculty');
+            $table->string('award');
+            $table->string('state_award');
+            $table->string('protocol');
+            $table->integer('award_year');
+            $table->integer('state_award_year');
         });
     }
 

@@ -12,9 +12,18 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Employee::query();
+        
+        foreach(Employee::$filterFields as $filterField) {
+            if ($request->has($filterField)) {
+                $query->where($filterField, $request->input($filterField));
+            }
+        }
+
+        $employees = $query->get();
+        return view('employees.index', compact('employees'));
     }
 
     /**
@@ -24,9 +33,20 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('employees.create');
     }
 
+    private function validateEmployee(Request $request) {
+        $request->validate([
+            'name' => 'required',
+            'faculty' => 'required',
+            'award' => 'required',
+            'state_award' => 'required',
+            'protocol' => 'required',
+            'award_year' => 'required',
+            'state_award_year' => 'required'
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -35,18 +55,12 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $this->validateEmployee($request);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Employee  $employee
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Employee $employee)
-    {
-        //
+        Employee::create($request->all());
+
+        return redirect()->route('employees.index')
+            ->with('success', 'Employee created successfully.');
     }
 
     /**
@@ -57,7 +71,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        //
+        return view('employees.edit', compact('employee'));
     }
 
     /**
@@ -69,7 +83,12 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        $this->validateEmployee($request);
+
+        $employee->update($request->all());
+
+        return redirect()->route('employees.index')
+            ->with('success', 'Employee updated successfully');
     }
 
     /**
@@ -80,6 +99,8 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee->delete();
+        return redirect()->route('employees.index')
+            ->with('success', 'Employee deleted successfully');
     }
 }
