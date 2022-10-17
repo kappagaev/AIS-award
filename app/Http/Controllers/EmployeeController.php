@@ -3,10 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Exports\EmployeeExport;
 use Illuminate\Http\Request;
+use Excel;
 
 class EmployeeController extends Controller
 {
+    public function export() 
+    {
+        return Excel::download(new EmployeeExport, 'employee.xlsx');
+    }
     /**
      * Display a listing of the resource.
      *
