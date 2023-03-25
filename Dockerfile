@@ -40,6 +40,18 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY php.ini /etc/php/8.1/cli/conf.d/99-sail.ini
 RUN chmod +x /usr/local/bin/start-container
 
+COPY . /var/www/html
+COPY .env.example /var/www/html/.env
+
+RUN composer install --no-interaction --no-suggest --no-scripts --prefer-dist
+RUN php artisan key:generate
+RUN php artisan storage:link
+RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 777 /var/www/html/storage
+RUN chmod +x /var/www/html/artisan
+RUN chmod +x /var/www/html/start-container
+
 EXPOSE 8000
 
-ENTRYPOINT ["start-container"]
+CMD ["/bin/bash", "-c", "./artisan migrate;./artisan serve"]
+
