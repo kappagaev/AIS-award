@@ -51,6 +51,14 @@ RUN chmod -R 777 /var/www/html/storage
 RUN chmod +x /var/www/html/artisan
 RUN chmod +x /var/www/html/start-container
 
+COPY .env.example /var/www/html/.env
+RUN echo "DB_DATABASE=$DB_DATABASE" >> .env
+RUN echo "DB_HOST=$DB_HOST" >> .env
+
+RUN echo "DB_PASSWORD=$DB_PASSWORD" >> .env
+RUN echo "DB_PORT=$DB_PORT" >> .env
+RUN echo "DB_USERNAME=$DB_USERNAME" >> .env
+
 EXPOSE 8000
 
 CMD ["/bin/bash", "-c", "./artisan config:clear;./artisan cache:clear;./artisan migrate;./artisan serve --host=0.0.0.0 --port=$PORT --env"]
