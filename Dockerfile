@@ -20,18 +20,19 @@ RUN apt-get update \
        php8.1-intl php8.1-readline \
        php8.1-ldap \
        php8.1-msgpack php8.1-igbinary php8.1-redis php8.1-swoole \
-       php8.1-memcached php8.1-pcov php8.1-xdebug \
-    && curl -sLS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer \
-    && curl -sLS https://deb.nodesource.com/setup_v14.x | bash - \
-    && apt-get install -y nodejs \
-    && npm install -g npm \
-    && apt-get update \
-    && apt-get install -y yarn \
-    && apt-get install -y mysql-client \
-    && apt-get -y autoremove \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+       php8.1-memcached php8.1-pcov php8.1-xdebug
 
+RUN curl -sLS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
+
+RUN curl -sLS https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
+RUN npm install -g npm
+RUN apt-get update
+RUN apt-get install -y yarn
+RUN apt-get install -y mysql-client
+RUN apt-get -y autoremove
+RUN apt-get clean
+RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.1
 
 COPY start-container /usr/local/bin/start-container
