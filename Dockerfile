@@ -53,5 +53,5 @@ RUN chmod +x /var/www/html/start-container
 
 EXPOSE 8000
 
-CMD ["/bin/bash", "-c", "./artisan migrate;./artisan serve"]
+CMD ["/bin/bash", "-c", "./artisan migrate;./artisan serve --host=0.0.0.0"]
 
