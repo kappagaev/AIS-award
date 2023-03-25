@@ -1,11 +1,5 @@
 FROM ubuntu:22.04
 
-LABEL maintainer="Taylor Otwell"
-
-ARG WWWGROUP
-ARG NODE_VERSION=18
-ARG POSTGRES_VERSION=15
-
 WORKDIR /var/www/html
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -44,9 +38,6 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.1
-
-RUN groupadd --force -g $WWWGROUP sail
-RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
 
 COPY start-container /usr/local/bin/start-container
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
