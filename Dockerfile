@@ -53,4 +53,4 @@ RUN chmod +x /var/www/html/start-container
 
 EXPOSE 8000
 
-CMD ["/bin/bash", "-c", "./artisan cache:clear;./artisan migrate;./artisan serve --host=0.0.0.0 --port=$PORT --env"]
+CMD ["/bin/bash", "-c", "./artisan config:clear;./artisan cache:clear;./artisan migrate;./artisan serve --host=0.0.0.0 --port=$PORT --env"]
