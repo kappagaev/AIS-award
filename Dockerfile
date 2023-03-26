@@ -44,8 +44,6 @@ COPY . /var/www/html
 COPY .env.example /var/www/html/.env
 
 RUN composer install --no-interaction --no-suggest --no-scripts --prefer-dist
-RUN php artisan key:generate
-RUN php artisan storage:link
 RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 777 /var/www/html/storage
 RUN chmod +x /var/www/html/artisan
@@ -58,6 +56,9 @@ RUN echo "DB_HOST=$DB_HOST" >> .env
 RUN echo "DB_PASSWORD=$DB_PASSWORD" >> .env
 RUN echo "DB_PORT=$DB_PORT" >> .env
 RUN echo "DB_USERNAME=$DB_USERNAME" >> .env
+
+RUN php artisan key:generate
+RUN php artisan storage:link
 
 EXPOSE 8000
 
