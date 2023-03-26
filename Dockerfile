@@ -56,6 +56,7 @@ RUN echo "DB_HOST=$DB_HOST" >> .env
 RUN echo "DB_PASSWORD=$DB_PASSWORD" >> .env
 RUN echo "DB_PORT=$DB_PORT" >> .env
 RUN echo "DB_USERNAME=$DB_USERNAME" >> .env
+RUN echo "DATABASE_URL=$DATABASE_URL" >> .env
 
 RUN php artisan key:generate
 RUN php artisan storage:link
