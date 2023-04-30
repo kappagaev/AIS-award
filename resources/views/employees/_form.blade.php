@@ -53,7 +53,7 @@ $stateAwards = ['Подяка МОН України', 'Грамота МОН У�
     </div>
 
     <div class="form-group">
-        <label for="award">{{ Employee::attributes()['award'] }}</label>
+        <label for="award" id="award_lable">{{ Employee::attributes()['award'] }}</label>
         <select name="award" id="award" class="form-control">
             @foreach ($awards as $award)
             <option value="{{ $award }}" @if (isset($employee) && $employee->award == $award) selected @endif>
@@ -63,7 +63,7 @@ $stateAwards = ['Подяка МОН України', 'Грамота МОН У�
         </select>
     </div>
     <div class="form-group">
-        <label for="stateAward">{{ Employee::attributes()['state_award'] }}</label>
+        <label for="stateAward" id="state_award_lable">{{ Employee::attributes()['state_award'] }}</label>
         <select name="state_award" id="stateAward" class="form-control">
             @foreach ($stateAwards as $state_award)
             <option value="{{ $state_award }}" @if (isset($employee) && $employee->state_award == $state_award) selected @endif>
@@ -90,9 +90,15 @@ const changeAwards = (type) => {
     if (type === "0") {
         $("#award").show();
         $("#stateAward").hide();
+
+        $("#award_lable").show();
+        $("#state_award_lable").hide();
     } else {
         $("#award").hide();
         $("#stateAward").show();
+
+        $("#award_lable").hide();
+        $("#state_award_lable").show();
     }
 }
 $("#is_state_award").on("change", () => {
