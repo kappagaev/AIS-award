@@ -22,7 +22,6 @@ class Employee extends Model
         'state_award',
         'protocol',
         'award_year',
-        'state_award_year'
     ];
     public static function getUnique($field) {
         $employees = Employee::all();
@@ -30,10 +29,10 @@ class Employee extends Model
         foreach ($employees as $employee) {
             $unique[] = $employee->$field;
         }
-        
+
         return array_unique($unique);
     }
-    
+
     public static $filterFields = [
         'name',
         'faculty',

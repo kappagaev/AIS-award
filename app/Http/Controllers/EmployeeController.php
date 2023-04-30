@@ -21,7 +21,8 @@ class EmployeeController extends Controller
         Excel::import(new EmployeeImport, request()->file('file'));
         return redirect('/employees');
     }
-    public function export() 
+
+    public function export()
     {
         return Excel::download(new EmployeeExport, 'employee.xlsx');
     }
@@ -33,7 +34,6 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         $query = Employee::query();
-        
         foreach(Employee::$filterFields as $filterField) {
             if ($request->has($filterField)) {
                 $query->where($filterField, $request->input($filterField));
@@ -62,7 +62,7 @@ class EmployeeController extends Controller
             'state_award' => 'required',
             'protocol' => 'required',
             'award_year' => 'required',
-            'state_award_year' => 'required'
+            // 'state_award_year' => 'required'
         ]);
     }
     /**

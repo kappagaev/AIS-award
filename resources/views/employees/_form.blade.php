@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\Employee;
 
 $suggestFields = ['name'];
@@ -12,34 +13,33 @@ $stateAwards = ['Подяка МОН України', 'Грамота МОН У�
 ?>
 <form method="post" action="{{ $action }}">
     @if (isset($method))
-        @method($method)
+    @method($method)
     @endif
     @csrf
     @foreach ($suggestFields as $field)
+    <div class="form-group">
         <div class="form-group">
-            <div class="form-group">
-                <label for="{{ $field }}">{{ Employee::attributes()[$field] }}</label>
+            <label for="{{ $field }}">{{ Employee::attributes()[$field] }}</label>
 
-                <input value="{{ $employee->$field ?? '' }}" id="{{ $field }}type="text" name="{{ $field }}"
-                    class="form-control" list="{{ $field . '-datalist' }}" />
-            </div>
-            <datalist id="{{ $field . '-datalist' }}">
-                @foreach (Employee::getUnique($field) as $uniqueField)
-                    <option value="{{ $uniqueField }}">
-                        {{ $uniqueField }}
-                    </option>
-                @endforeach
-            </datalist>
-
+            <input value="{{ $employee->$field ?? '' }}" id="{{ $field }}type=" text" name="{{ $field }}" class="form-control" list="{{ $field . '-datalist' }}" />
         </div>
+        <datalist id="{{ $field . '-datalist' }}">
+            @foreach (Employee::getUnique($field) as $uniqueField)
+            <option value="{{ $uniqueField }}">
+                {{ $uniqueField }}
+            </option>
+            @endforeach
+        </datalist>
+
+    </div>
     @endForeach
     <div class="form-group">
         <label for="faculty">{{ Employee::attributes()['faculty'] }}</label>
         <select name="faculty" id="faculty" class="form-control">
             @foreach ($faculties as $faculty)
-                <option value="{{ $faculty }}" @if (isset($employee) && $employee->faculty == $faculty) selected @endif>
-                    {{ $faculty }}
-                </option>
+            <option value="{{ $faculty }}" @if (isset($employee) && $employee->faculty == $faculty) selected @endif>
+                {{ $faculty }}
+            </option>
             @endforeach
         </select>
     </div>
@@ -47,9 +47,9 @@ $stateAwards = ['Подяка МОН України', 'Грамота МОН У�
         <label for="award">{{ Employee::attributes()['award'] }}</label>
         <select name="award" id="award" class="form-control">
             @foreach ($awards as $award)
-                <option value="{{ $award }}" @if (isset($employee) && $employee->award == $award) selected @endif>
-                    {{ $award }}
-                </option>
+            <option value="{{ $award }}" @if (isset($employee) && $employee->award == $award) selected @endif>
+                {{ $award }}
+            </option>
             @endforeach
         </select>
     </div>
@@ -57,26 +57,19 @@ $stateAwards = ['Подяка МОН України', 'Грамота МОН У�
         <label for="stateAward">{{ Employee::attributes()['state_award'] }}</label>
         <select name="state_award" id="stateAward" class="form-control">
             @foreach ($stateAwards as $state_award)
-                <option value="{{ $state_award }}" @if (isset($employee) && $employee->state_award == $state_award) selected @endif>
-                    {{ $state_award }}
-                </option>
+            <option value="{{ $state_award }}" @if (isset($employee) && $employee->state_award == $state_award) selected @endif>
+                {{ $state_award }}
+            </option>
             @endforeach
         </select>
 
         <div class="form-group">
             <label for="protocol">№ протоколу ВР КПІ ім. Ігоря Сікорського про відзначення</label>
-            <input type="text" class="form-control" id="protocol" name="protocol"
-                value="{{ $employee->protocol ?? '' }}">
+            <input type="text" class="form-control" id="protocol" name="protocol" value="{{ $employee->protocol ?? '' }}">
         </div>
         <div class="form-group">
-            <label for="award_year">Рік відзначення КПІ</label>
-            <input type="number" min="1990" max="2022" class="form-control" id="award_year" name="award_year"
-                value="{{ $employee->award_year ?? '2022' }}">
-        </div>
-        <div class="form-group">
-            <label for="state_award_year">Рік призначення державою</label>
-            <input type="number" min="1990" max="2022" class="form-control" id="state_award_year"
-                name="state_award_year" value="{{ $employee->state_award_year ?? '2022' }}">
+            <label for="award_year">Рік відзначення</label>
+            <input type="number" min="1990" max="2022" class="form-control" id="award_year" name="award_year" value="{{ $employee->award_year ?? '2022' }}">
         </div>
         <button type="submit" class="btn btn-success">Відправити</button>
 </form>

@@ -32,8 +32,7 @@ use App\Models\Employee;
                 <th scope="col">Нагорода (Почесне звання, відзнака та грамота)</th>
                 <th scope="col">Державна нагорода</th>
                 <th scope="col">№ протоколу ВР КПІ ім. Ігоря Сікорського про відзначення</th>
-                <th scope="col">Рік відзначення КПІ</th>
-                <th scope="col">Рік призначення державою</th>
+                <th scope="col">Рік нагароди @TODO поміняти</th>
                 <th scope="col">Дії</th>
             </tr>
         </thead>
