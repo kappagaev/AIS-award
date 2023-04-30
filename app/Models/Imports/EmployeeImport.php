@@ -33,7 +33,6 @@ class EmployeeImport implements ToModel, WithStartRow
             'state_award' => $row[4],
             'protocol' => $row[5],
             'award_year' => $row[6],
-            'state_award_year' => $row[7],
             'is_state_award' => $is_state_award,
         ]);
     }

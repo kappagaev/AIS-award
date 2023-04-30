@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('faculty');
-            $table->string('award');
-            $table->string('state_award');
+            $table->string('award')->nullable();
+            $table->string('state_award')->nullable();
             $table->string('protocol');
             $table->integer('award_year');
             $table->integer('state_award_year');
