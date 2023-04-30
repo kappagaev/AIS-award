@@ -7,6 +7,7 @@ use App\Models\Exports\EmployeeExport;
 use App\Models\Imports\EmployeeImport;
 use Illuminate\Http\Request;
 use Excel;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
@@ -62,6 +63,7 @@ class EmployeeController extends Controller
             'state_award' => 'required',
             'protocol' => 'required',
             'award_year' => 'required',
+            'is_state_award' => 'boolean',
             // 'state_award_year' => 'required'
         ]);
     }

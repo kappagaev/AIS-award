@@ -43,6 +43,15 @@ $stateAwards = ['Подяка МОН України', 'Грамота МОН У�
             @endforeach
         </select>
     </div>
+
+    <div class="form-group">
+        <label for="is_state_award">Тип нагороди</label>
+        <select id="is_state_award" name="is_state_award" class="form-control">
+            <option value="0" @if (isset($employee) && $employee->is_state_award) selected @endif>Нагорода</option>
+            <option value="1"@if (isset($employee) && $employee->is_state_award) selected @endif>Державна нагорода</option>
+        </select>
+    </div>
+
     <div class="form-group">
         <label for="award">{{ Employee::attributes()['award'] }}</label>
         <select name="award" id="award" class="form-control">
@@ -73,3 +82,22 @@ $stateAwards = ['Подяка МОН України', 'Грамота МОН У�
         </div>
         <button type="submit" class="btn btn-success">Відправити</button>
 </form>
+
+<script>
+
+const changeAwards = (type) => {
+    console.log(type);
+    if (type === "0") {
+        $("#award").show();
+        $("#stateAward").hide();
+    } else {
+        $("#award").hide();
+        $("#stateAward").show();
+    }
+}
+$("#is_state_award").on("change", () => {
+    const type = $("#is_state_award").val();
+    changeAwards(type);
+})
+changeAwards($("#is_state_award").val());
+</script>

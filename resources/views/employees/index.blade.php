@@ -42,11 +42,10 @@ use App\Models\Employee;
                     <th scope="row">{{ $employee->id }}</th>
                     <td>{{ $employee->name }}</td>
                     <td>{{ $employee->faculty }}</td>
-                    <td>{{ $employee->award }}</td>
-                    <td>{{ $employee->state_award }}</td>
+                    <td>@if(!$employee->is_state_award){{ $employee->award }}@endif</td>
+                    <td>@if($employee->is_state_award){{ $employee->state_award }}@endif</td>
                     <td>{{ $employee->protocol }}</td>
                     <td>{{ $employee->award_year }}</td>
-                    <td>{{ $employee->state_award_year }}</td>
                     <td>
                         <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-primary">Edit</a>
                         <form action="{{ route('employees.destroy', $employee->id) }}" method="post">

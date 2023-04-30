@@ -9,6 +9,11 @@ class Employee extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    protected $casts = [
+        'is_state_award' => 'boolean',
+    ];
+
     // $table->string('name');
     // $table->string('faculty');
     // $table->string('award');
@@ -22,6 +27,7 @@ class Employee extends Model
         'state_award',
         'protocol',
         'award_year',
+        'is_state_award',
     ];
     public static function getUnique($field) {
         $employees = Employee::all();
@@ -39,7 +45,7 @@ class Employee extends Model
         'award',
         'state_award',
         'award_year',
-        'state_award_year'
+        'is_state_award',
     ];
 
     public static function attributes() {
@@ -49,7 +55,7 @@ class Employee extends Model
             'award' => 'Нагорода (Почесне звання, відзнака та грамота)',
             'state_award'=> 'Державна нагорода',
             'award_year'=> 'Рік відзначення КПІ',
-            'state_award_year'=> 'Рік призначення державою'
+            'is_state_award'=> 'Державна нагорода',
         ];
     }
 }

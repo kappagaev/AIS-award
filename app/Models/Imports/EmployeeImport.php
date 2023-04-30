@@ -4,7 +4,6 @@ namespace App\Models\Imports;
 
 use App\Models\Employee;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
 class EmployeeImport implements ToModel, WithStartRow
@@ -20,6 +19,12 @@ class EmployeeImport implements ToModel, WithStartRow
      */
     public function model(array $row)
     {
+        $state_award = $row[4];
+        $is_state_award = false;
+        if (trim($state_award) != '' && $state_award) {
+            $is_state_award = true;
+        }
+
         return new Employee([
             'id' => $row[0],
             'name' => $row[1],
@@ -29,6 +34,7 @@ class EmployeeImport implements ToModel, WithStartRow
             'protocol' => $row[5],
             'award_year' => $row[6],
             'state_award_year' => $row[7],
+            'is_state_award' => $is_state_award,
         ]);
     }
 }
